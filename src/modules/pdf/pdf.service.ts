@@ -1,9 +1,11 @@
 import { join } from "path";
-import { runWorker } from "../../utils";
+import { runInProcess } from "../../utils/runInProcess";
 
 class PdfService {
   async parsePdfText(filePath: string): Promise<string> {
-    return runWorker(join(__dirname, "pdf.worker.ts"), filePath);
+    return runInProcess(join(__dirname, "pdfParse.worker.ts"), filePath, {
+      timeoutMs: 3000,
+    });
   }
 }
 

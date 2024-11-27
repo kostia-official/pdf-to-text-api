@@ -23,8 +23,7 @@ pdfRouter.post("/pdf/parse/text", upload.single("file"), async (req, res) => {
 
     res.json({ text: pdfText });
   } catch (err) {
-    console.error(err);
-    res.status(400).send("Can't parse PDF");
+    res.status(422).send("Can't parse PDF");
   } finally {
     fs.unlinkSync(filePath);
   }
